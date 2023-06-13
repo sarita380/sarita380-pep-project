@@ -42,7 +42,7 @@ public class MessageDAO{
     /**
      * Retrieve a message from an expecific message_id number
      */
-    public Message getMessageByMessageId(int message_id){
+    public Message MessageByMessageId(int message_id){
         
         Connection connection = ConnectionUtil.getConnection();
         try {
@@ -158,7 +158,7 @@ public class MessageDAO{
  * @return 
  */
 
- public void updateMessage(int id, Message message){
+ public void updateMessage(int message_id, Message message){
     Connection connection = ConnectionUtil.getConnection();
     try {
         //Write SQL logic here
@@ -172,7 +172,7 @@ public class MessageDAO{
        preparedStatement.setInt(1, message.getPosted_by());
        preparedStatement.setString(2, message.getMessage_text());
        preparedStatement.setLong(3, message.getTime_posted_epoch());
-       preparedStatement.setInt(4, id);
+       preparedStatement.setInt(4, message_id);
        
        preparedStatement.executeUpdate();
    

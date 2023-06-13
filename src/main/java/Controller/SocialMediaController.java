@@ -75,7 +75,6 @@ private void postRegisterHandler(Context ctx) throws JsonProcessingException{
 
 private void postLoginHandler(Context ctx) throws JsonProcessingException{
     Account account = ctx.bodyAsClass(Account.class);
-   // Boolean isAuthenticated = accountService.authenticate(account);
    Account gt = accountService.userLogin(account);
     if(gt != null){
         ctx.json(gt);
@@ -83,7 +82,6 @@ private void postLoginHandler(Context ctx) throws JsonProcessingException{
     }else{
         ctx.status(401);
     }
-  
 }
 /**
  * work ok
@@ -115,10 +113,10 @@ private void getAllMessageHandler(Context ctx)throws JsonProcessingException{
     ctx.json(messageService.getAllMessages()); 
     ctx.status(200);
 }
-//Work ok do not change
+
+//Work ok 
 private Message getMessageByMsgIdHandler(Context ctx)throws JsonProcessingException{
    
-  
     int message_id = Integer.parseInt(ctx.pathParam("message_id"));
    
     // get message back
@@ -156,19 +154,23 @@ private Message deleteMessageByMsgeIdHandler(Context ctx) throws JsonProcessingE
 }
 private void patchMessageUpdateHandler(Context ctx) throws JsonProcessingException {
 
- ObjectMapper mapper = new ObjectMapper();
+   ObjectMapper mapper = new ObjectMapper();
    Message message = mapper.readValue(ctx.body(), Message.class);
+
    int message_id = Integer.parseInt(ctx.pathParam("message_id"));
    Message updateTxMsg = messageService.updateMessageService(message_id, message);
    
    System.out.println(updateTxMsg);
+
    if(updateTxMsg != null){
+    
     ctx.json(mapper.writeValueAsString(updateTxMsg));
     ctx.status(200);
+    
    }else{
     ctx.status(400);
    }
-  
+
 }
 
 /*********************************
@@ -177,13 +179,12 @@ private void patchMessageUpdateHandler(Context ctx) throws JsonProcessingExcepti
 private void getMessageByAccountIdHandler(Context ctx)throws JsonProcessingException{
      // get request information if needed
      int account_id = Integer.parseInt(ctx.pathParam("account_id"));
-     // call service method
+     // call messageService method
      List<Message> msgReturned = messageService.getMessagesFromUserList(account_id);
     // send results to client
      ctx.json(msgReturned);
      ctx.status(200); 
-    
-              
+             
 }
 
 }

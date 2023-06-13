@@ -38,7 +38,7 @@ public class MessageService {
      */
  public Message getMessageByIdMessage(int message_id){
    
-    return messageDAO.getMessageByMessageId(message_id);
+    return messageDAO.MessageByMessageId(message_id);
     
 }
 
@@ -57,17 +57,18 @@ public class MessageService {
  */
 public Message updateMessageService(int message_id, Message message){
 
-      Message existingMessage =   messageDAO.getMessageByMessageId(message_id); //messageDAO.getMessageByMessageId(message_id); 
+      Message existingMessage =  messageDAO.MessageByMessageId(message_id);  
    
-       if(existingMessage != null &&  message.getMessage_text().isEmpty() == false && message.getMessage_text().length() > 255){
+       if(existingMessage != null &&  message.getMessage_text().isBlank()== false && message.getMessage_text().length()<=255 ){
       
-        existingMessage.setPosted_by(message.getPosted_by());
-        existingMessage.setMessage_text(message.getMessage_text());
-        existingMessage.setTime_posted_epoch(message.getTime_posted_epoch());
-        return existingMessage;
-        }
-        
+        existingMessage.setPosted_by(message.posted_by);
+        existingMessage.setMessage_text(message.message_text);
+         existingMessage.setTime_posted_epoch(message.time_posted_epoch);
+
+       }
+      
        return null;
+       
 }
 
 /* *
@@ -92,7 +93,7 @@ return storeAllMessagesFromUser;
  */
  public Message deleteMessage(Message message_id){
 
-    Message existingMessage =  messageDAO.getMessageByMessageId(message_id.getMessage_id());
+    Message existingMessage =  messageDAO.MessageByMessageId(message_id.getMessage_id());
     if (existingMessage != null){
     
        messageDAO.deleteMessage(existingMessage);
