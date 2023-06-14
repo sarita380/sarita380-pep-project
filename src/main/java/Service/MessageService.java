@@ -59,16 +59,13 @@ public Message updateMessageService(int message_id, Message message){
 
       Message existingMessage =  messageDAO.MessageByMessageId(message_id);  
    
-       if(existingMessage != null &&  message.getMessage_text().isBlank()== false && message.getMessage_text().length()<=255 ){
+       if(existingMessage != null &&  !message.getMessage_text().isBlank() && message.getMessage_text().length()<=255 ){
       
         existingMessage.setPosted_by(message.posted_by);
         existingMessage.setMessage_text(message.message_text);
          existingMessage.setTime_posted_epoch(message.time_posted_epoch);
 
-       }
-      
-       return null;
-       
+       }return null;
 }
 
 /* *

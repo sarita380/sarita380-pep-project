@@ -154,17 +154,17 @@ public class MessageDAO{
     return null;
 }
 /***
- * update message text
+ * Update Message
  * @return 
  */
 
- public void updateMessage(int message_id, Message message){
+ public Message updateMessage(int message_id, Message message){
     Connection connection = ConnectionUtil.getConnection();
     try {
         //Write SQL logic here
      
      String sql = "UPDATE message SET posted_by = ?, message_text = ?, time_posted_epoch = ? WHERE message_id = ?;";
-    
+        //Prepared statements
      PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
         //write PreparedStatement setString and setInt methods here.
@@ -179,7 +179,7 @@ public class MessageDAO{
     }catch(SQLException e){
         System.out.println(e.getMessage());
     }
-   
+   return null;
 }
 
 

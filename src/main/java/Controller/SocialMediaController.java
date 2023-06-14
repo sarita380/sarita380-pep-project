@@ -152,6 +152,11 @@ private Message deleteMessageByMsgeIdHandler(Context ctx) throws JsonProcessingE
     } 
   return null;  
 }
+/**
+ * Update Message
+ * @param ctx
+ * @throws JsonProcessingException
+ */
 private void patchMessageUpdateHandler(Context ctx) throws JsonProcessingException {
 
    ObjectMapper mapper = new ObjectMapper();
